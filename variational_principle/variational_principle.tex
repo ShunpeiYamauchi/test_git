@@ -1,0 +1,105 @@
+\documentclass{jsarticle}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cases}
+\usepackage[dvips]{graphicx}
+\usepackage{ascmac}
+\usepackage{slashbox}
+\usepackage{array}
+\begin{document}
+\section{変分原理とは何か}
+局所的な記述：math::differential equations(ODE, PDE, SDE, etc.), physics::Newton eq, Maxwell eq, Schrodinger eq, etc)
+
+大域的な記述：？？？
+
+\subsection{言葉の準備}
+・独立変数の変分
+
+独立変数 $x$ が　$x=a$ から $\tilde{x} = a+ \Delta x$ になったときの $\Delta x$ を独立変数 $x$ の変分と呼ぶ．
+
+・従属変数（函数）の変分
+
+独立変数 $x$ の変化に応じて函数 $f(x) = f(a)$ が $f(\tilde{x}) =f(a) +\Delta f$ になったときの $\Delta f$ を函数 $f$ の変分と呼ぶ．
+
+\subsubsection{変分の性質と最大最小問題}
+$x=a$ における変分 $\Delta f$ が $\Delta f \ge 0$ であれば， $f(x)$ は $x=a$ で最小．
+\subsection{様々な函数のパラメーター}
+\subsubsection{可算個のパラメーター}
+$f(\{x_i\})$ の形でかける場合 $\Rightarrow$  $\Delta f = \sum_i \Delta_i f$ \quad ($\Delta_i f$ は $i$ 番目の変数 $x_i$ の変化に応じた変分)
+
+\subsubsection{非可算個のパラメーターとオイラーの公式}
+パラメーター $x$ を用いて $y=y(x), y'(x) =dy/dx$ により
+\begin{equation}
+I=\int_{x_0}^{x_1} f(x,y(x), y'(x)) dx
+\end{equation}
+の変分を考える．このときの $I$ のように，函数 $y(x), y'(x)$ を変数として定まるものを汎関数と呼ぶ．
+
+$y(x)$ を $y(x) + \eta (x)$ だけ変化させたときの $I$ の変分 $\delta I$ は $\nu (x)$ の 1 次まで求めると，
+\begin{eqnarray}
+\delta I &= \int_{x_0}^{x_1} \left( f_y \cdot \eta (x) + f_{y'} \cdot \eta' (x)\right)\ dx  \nonumber \\
+	   &= \int_{x_0}^{x_1} \left( f_y -\frac{d}{dx} f_{y'} \right) dx + \left[ f_{y'} \cdot \eta(x) \right]_{x_0}^{x_1}
+\end{eqnarray}
+となり，境界条件 $\eta(x_0) = \eta (x_1) =0$ のもとで $\delta I = 0$ となる十分条件は
+\begin{equation}
+f_y - \frac{d}{dx} f_{y'} =0
+\end{equation} 
+とかける．この等式をオイラーの公式という．また， $I$ を極値にするような函数 $y=y(x)$ を停留函数（stationary function）と呼ぶ．
+\subsubsection{オイラーの公式の便利な変形}
+(4) を用いて次のような等式が得られる．
+\begin{equation}
+\frac{d}{dx} \left( f -y'f_{y'} \right) = \frac{\partial f}{\partial x}
+\end{equation}
+導出の際にはオイラーの公式を $df_{y'}/dx = f_y$ に注意すると良い．
+さらに， $f$ が陽に $x$ を含まない場合は，定数 $c$ を用いて
+\begin{equation}
+f-y'f_{y'} = c
+\end{equation}
+と書ける．
+\subsection{制約条件つきの変分問題（ラグランジュの未定係数法）}
+\begin{equation}
+J=\int_{x_0}^{x_1} g(x,y,y')\ dx
+\end{equation}
+が一定の値をとる条件のもとで，
+\begin{equation}
+I=\int_{x_0}^{x_1} f(x,y,y')\ dx
+\end{equation}
+の最小値を求める．
+
+$\Rightarrow$ $ I +\lambda J$ の極値を制約条件なしに調べれば良い（$\lambda \in \mathbb{R}$）
+
+\begin{equation}
+\Rightarrow \frac{d}{dx} f_{y'} -f_y +\lambda \left( \frac{d}{dx} g_{y'} -g_y \right) = 0
+\end{equation}
+
+\underline{例題}
+
+（ここに図）
+
+斜線部の面積 $I$ を最小にする $y(x)$ は？
+
+曲線の長さ $J$ は
+\begin{equation}
+J = \int_{x_0}^{x_1} \sqrt{1+(y')^2}\ dx,
+\end{equation}
+面積 $I$ は
+\begin{equation}
+I = \int_{x_0}^{x_1} y\ dx
+\end{equation}
+であり，双方 $x$ を陽に持たない函数の積分で表されている．従って，$I + \lambda J$ が極値をとる $y(x)$ はオイラーの公式から，定数 $c$ を用いて
+\begin{equation}
+y +\lambda \left( \sqrt{1+(y')^2}+ y'\cdot \frac{y'}{\sqrt{1+(y')^2}}  \right) = c
+\end{equation}
+を解くことにより与えられる．この式は容易に次のように変形できる．
+\begin{equation}
+y' = \pm \frac{\sqrt{\lambda^2 -(y-c)^2}}{y-c}
+\end{equation}
+この解はさらなる任意定数 $b$ を用いて
+\begin{equation}
+(x-b)^2 + (y-c)^2 = \lambda^2
+\end{equation}
+という形になる．各パラメータは$\lambda =J/\pi,\ b=(x_0+x_1)/2,\ c = 0, x_1 =x_0 +2\lambda$．
+
+\underline{注}
+
+ $I$ を固定，$J$ を最小にするためには $J +\lambda I$ を極小にすれば良い．この場合も円が停留曲線になる．
+\end{document}
